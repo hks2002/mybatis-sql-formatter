@@ -1,201 +1,39 @@
-<!--
-* @Author                : Robert Huang<56649783@qq.com>
-* @CreatedDate           : 2023-02-04 20:34:47
-* @LastEditors           : Robert Huang<56649783@qq.com>
-* @LastEditDate          : 2023-02-04 20:35:05
-* @FilePath              : auto-header-plus/README.md
-* @CopyRight             : MerBleueAviation
--->
+# MyBatis SQL Formatter
+![Logo](https://github.com/hks2002/mybatis-sql-formatter/raw/master/images/icon.png)
 
-# Auto Header
-
-![Logo](https://github.com/hks2002/auto-header-plus/raw/master/src/images/icon.png)
-
-![Github Version](https://img.shields.io/github/package-json/v/hks2002/auto-header-plus) ![Github Build Status](https://img.shields.io/github/actions/workflow/status/hks2002/auto-header-plus/Build.yml) ![GitHub License](https://img.shields.io/github/license/hks2002/auto-header-plus) ![GitHub Starts](https://img.shields.io/github/stars/hks2002/auto-header-plus)
-![VS marketplace Version](https://img.shields.io/visual-studio-marketplace/v/MerBleueAviation.auto-header-plus) ![downloads](https://img.shields.io/visual-studio-marketplace/d/MerBleueAviation.auto-header-plus) ![installs](https://img.shields.io/visual-studio-marketplace/i/MerBleueAviation.auto-header-plus) ![rating](https://img.shields.io/visual-studio-marketplace/r/MerBleueAviation.auto-header-plus)
-[![semantic-release: angular](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
+![Github Version](https://img.shields.io/github/package-json/v/hks2002/mybatis-sql-formatter)
+![Github Build Status](https://img.shields.io/github/actions/workflow/status/hks2002/mybatis-sql-formatter/Build.yml)
+![GitHub License](https://img.shields.io/github/license/hks2002/mybatis-sql-formatter)
+![GitHub Starts](https://img.shields.io/github/stars/hks2002/mybatis-sql-formatter)
+![VS marketplace Version](https://img.shields.io/visual-studio-marketplace/v/MerBleueAviation.mybatis-sql-formatter)
+![downloads](https://img.shields.io/visual-studio-marketplace/d/MerBleueAviation.mybatis-sql-formatter)
+![installs](https://img.shields.io/visual-studio-marketplace/i/MerBleueAviation.mybatis-sql-formatter)
+![rating](https://img.shields.io/visual-studio-marketplace/r/MerBleueAviation.mybatis-sql-formatter)
 
 [English](./README.md) | [简体中文](./README.zh-cn.md)
 
-This extension let you automatically add a header to the top of the current file. The supported comment style as bellow:
-
-- Javascript、Java、 go、 C++、 C、C#、php、rust、solidity
-
-```
-/*
-* @Author      : MerBleueAviation
-* @Date        : 2018-09-27 13:55:00
-* @LastEditors : MerBleueAviation
-* @LastEditTime: 2018-11-08 16:10:19
-*/
-```
-
-- html、vue、markdown
-
-```
-<!--
-* @Author      : MerBleueAviation
-* @Date        : 2018-09-27 13:55:00
-* @LastEditors : MerBleueAviation
-* @LastEditTime: 2018-11-08 16:10:19
--->
-```
-
-- python
-
-```
-'''
-@Author      : MerBleueAviation
-@Date        : 2018-09-27 13:55:00
-@LastEditors : MerBleueAviation
-@LastEditTime: 2018-11-08 16:10:19
-'''
-```
-
-- vba
-
-```
-'
-' @Author      : MerBleueAviation
-' @Date        : 2018-09-27 13:55:00
-' @LastEditors : MerBleueAviation
-' @LastEditTime: 2018-11-08 16:10:19
-'
-```
-
-- shellscript
-
-```
-###
-# @Author      : MerBleueAviation
-# @Date        : 2018-09-27 13:55:00
-# @LastEditors : MerBleueAviation
-# @LastEditTime: 2018-11-08 16:10:19
-###
-```
-
-- lua
-
-```
---[[
-@Author      : MerBleueAviation
-@Date        : 2018-09-27 13:55:00
-@LastEditors : MerBleueAviation
-@LastEditTime: 2018-11-08 16:10:19
---]]
-```
+A VS Code extension to format MyBatis XML files and SQL fragments containing MyBatis dynamic tags.
 
 ## Features
 
-- Support custom comment element, except preset: `Author`,`CreatedDate`,`LastEditors`,`LastEditDate`,`FilePath`,`CopyRight`，`additionalComment`，It could add your customer element, for example: `Version`,`Description`。
+- **Format MyBatis XML**: Correctly formats `<mapper>`, `<select>`, `<insert>`, `<update>`, `<delete>` and other MyBatis tags with proper indentation.
+- **Format SQL Fragments**: Supports formatting raw SQL fragments mixed with MyBatis dynamic tags (like `<if>`, `<choose>`, `<where>`, `<foreach>`) directly, without needing a root XML element.
+- **SQL Indentation**: Formats the SQL content inside MyBatis tags using standard SQL formatting rules while preserving MyBatis tag structure.
 
-- Support custom header comment style, support the following variables:
+## Usage
 
-  - First Line: `firstLineStart`, `firstLineMiddle`, `firstLineEnd`
-  - Middle Line: `middleLineStart`, `commentElementPrefix`, `commentElementSuffix`, `middleLineEnd`,
-  - Last Line: `lastLineStart`, `lastLineMiddle`, `lastLineEnd`
-  - Others: `commentElementWidth`,`lineWidth`, `dateFormat`。
+1. Open a MyBatis XML file (`.xml`) or a file containing MyBatis SQL (`.sql`).
+2. Run the command **Format Document** (`Shift+Alt+F` on Windows) or right-click and select **Format Document**.
+3. Alternatively, use the dedicated command **Format MyBatis SQL** or the shortcut:
+   - Windows: `Ctrl+Win+F`
+   - Mac: `Ctrl+Cmd+F`
+   - Linux: `Ctrl+Meta+F`
 
-- Support set comment element value to `Command` result: `git config user.name`，`git config user.email`， `cat license.md`， or special value: `MODIFIED_DATE`, `CREATED_DATE`, `FULL_PATH`, `RELATIVE_PATH`, `SHORTNAME_PATH`。
+## Requirements
 
-- Easy configuration, you can set them in the settings UI or `settings.json`。
-  ![ui](https://github.com/hks2002/auto-header-plus/raw/master/src/images/ui.png)
-
-  It can achieve the following effects after configure:
-
-```
-/***************************************
-* @Author      : MerBleueAviation      *
-* @Date        : 2018-09-27 13:55:00   *
-* @LastEditors : MerBleueAviation      *
-* @LastEditTime: 2018-11-08 16:10:19   *
-* @FilePath    : RelativePath          *
-* @Version     : 1.0.0                 *
-* @Description :                       *
-*                                      *
-* Additional comments:                 *
-* Some license information from file:  *
-* balabala  balabala                   *
-***************************************/
-```
+None.
 
 ## Extension Settings
 
-```
-  enableAutoAddOnSave: true,
-  enableAutoAddOnNew: true,
-  allowCreateTimeDiff: true,
-  dateFormat: 'YYYY-MM-DD HH:mm:ss',
-  commentElements: [
-    'Author',
-    'CreatedDate',
-    'LastEditors',
-    'LastEditDate',
-    'FilePath',
-    'CopyRight'
-  ],
-  commentElementsValue: {
-    Author: '${git config user.name}<${git config user.email}>',
-    CreatedDate: 'CreatedDate',
-    LastEditors: '${git config user.name}<${git config user.email}>',
-    LastEditDate: 'ModifiedDate',
-    FilePath: 'RelativePath',
-    CopyRight: ''
-  },
-  customCommentElementsValue: { YourCustomCommentElement1: '' },
-  style: {
-    '0': {
-      enable: true,
-      applyTo: 'c|cpp|h|hpp|cs|java|js|ts|go|php|rs',
-      firstLineStart: '/**',
-      firstLineMiddle: '*',
-      firstLineEnd: '*',
-      middleLineStart: ' * ',
-      commentElementPrefix: '@',
-      commentElementSuffix: ': ',
-      middleLineEnd: '',
-      lastLineStart: ' *',
-      lastLineMiddle: '*',
-      lastLineEnd: '*/',
-      commentElementWidth: 25,
-      lineWidth: 80
-    }
-  },
-  additionalComment: '',
-  enableStyleSymbolCheck: true,
-  logLevel: 'INFO'
-```
+No configuration needed yet.
 
-If you need to add a new comment style, you can add a new style in `style`:
-
-```
-  '6': {
-    enable: true,
-    applyTo: 'unknown',
-    firstLineStart: "'''",
-    firstLineMiddle: '',
-    firstLineEnd: '',
-    middleLineStart: "''' ",
-    commentElementPrefix: '@',
-    commentElementSuffix: ': ',
-    middleLineEnd: '',
-    lastLineStart: "'''",
-    lastLineMiddle: '',
-    lastLineEnd: '',
-    commentElementWidth: 25,
-    lineWidth: 80
-  }
-```
-
-> Note that the style number `6` must be unique，`0`->`5` are preset and reserved by extension.
-
-## Extension Commands
-
-This extension contributes the command: `Add Header` to the Command Palette.
-bind key:
-
-- win: `ctrl+alt+h`
-- mac: `cmd+alt+h`
-- linux: `ctrl+alt+h`
-
-**Enjoy!**
