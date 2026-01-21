@@ -1,0 +1,77 @@
+{
+  "name": "mybatis-sql-formatter",
+  "displayName": "MyBatis SQL Formatter",
+  "description": "format MyBatis tag mixed with SQL",
+  "publisher": "MerBleueAviation",
+  "license": "MIT",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hks2002/mybatis-sql-formatter.git"
+  },
+  "scripts": {
+    "compile": "cspell . && node esbuild.config.js",
+    "watch": "node esbuild.config.js --watch",
+    "lint": "eslint src --ext js",
+    "spell-check": "cspell .",
+    "pretest": "yarn run compile && yarn run lint",
+    "test": "node ./src/test/runTest.js",
+    "vscode:prepublish": "yarn run compile",
+    "publish": "vsce publish --yarn --skip-duplicate",
+    "package": "vsce package --yarn"
+  },
+  "dependencies": {
+    "sql-formatter": "^15.7.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.2",
+    "@vscode/test-electron": "^2.5.2",
+    "@vscode/vsce": "^3.7.1",
+    "cspell": "^9.6.0",
+    "esbuild": "^0.27.2",
+    "eslint": "^9.39.2",
+    "glob": "^11.0.3",
+    "globals": "^17.0.0",
+    "mocha": "^11.7.1"
+  },
+  "icon": "images/icon.png",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "mybatis",
+    "sql",
+    "formatter"
+  ],
+  "activationEvents": [
+    "onLanguage:xml",
+    "onLanguage:sql"
+  ],
+  "main": "dist/extension.js",
+  "l10n": "l10n",
+  "contributes": {
+    "commands": [
+      {
+        "command": "mybatis-sql-formatter.format",
+        "title": "Format MyBatis SQL"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "MyBatis SQL Formatter",
+      "properties": {}
+    },
+    "keybindings": [
+      {
+        "command": "mybatis-sql-formatter.format",
+        "key": "ctrl+win+f",
+        "mac": "ctrl+cmd+f",
+        "linux": "ctrl+meta+f",
+        "when": "editorTextFocus"
+      }
+    ]
+  }
+}
