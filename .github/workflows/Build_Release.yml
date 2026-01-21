@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - 'master'
+      - 'main'
 
 # https://github.com/OWNER/REPO/settings/actions
 # MUST CHANGE GITHUB_TOKEN PERMISSION FROM READ TO WRITE
