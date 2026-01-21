@@ -1,5 +1,4 @@
 # MyBatis SQL Formatter
-![Logo](https://github.com/hks2002/mybatis-sql-formatter/raw/master/images/icon.png)
 
 ![Github Version](https://img.shields.io/github/package-json/v/hks2002/mybatis-sql-formatter)
 ![Github Build Status](https://img.shields.io/github/actions/workflow/status/hks2002/mybatis-sql-formatter/Build.yml)
@@ -13,6 +12,8 @@
 [English](./README.md) | [简体中文](./README.zh-cn.md)
 
 A VS Code extension to format MyBatis XML files and SQL fragments containing MyBatis dynamic tags.
+
+![Logo](./images/icon.png)
 
 ## Features
 

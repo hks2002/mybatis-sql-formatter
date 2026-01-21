@@ -12,7 +12,7 @@
 
 一个用于格式化 MyBatis XML 文件和包含 MyBatis 动态标签的 SQL 片段的 VS Code 扩展。
 
-![Logo](images/icon.png)
+![Logo](./images/icon.png)
 
 ## 功能特性 (Features)
 
