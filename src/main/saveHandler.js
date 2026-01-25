@@ -2,7 +2,8 @@
  * @Author                : Robert Huang<56649783@qq.com>                      *
  * @CreatedDate           : 2025-08-19 12:00:23                                *
  * @LastEditors           : Robert Huang<56649783@qq.com>                      *
- * @LastEditDate          : 2026-01-20 19:43:55                                *
+ * @LastEditDate          : 2026-01-25 23:26:31                                *
+ * @FilePath              : mybatis-sql-formatter/src/main/saveHandler.js      *
  * @CopyRight             : MerBleueAviation                                   *
  ******************************************************************************/
 
@@ -17,10 +18,16 @@ const formatCurrentEditor = () => {
   if (editor) {
     const doc = editor.document;
     const text = doc.getText();
+    const fileName = doc.fileName;
+
+    if (fileName.endsWith("pom.xml")) {
+      logger.info(t("Skip formatting pom.xml"));
+      return;
+    }
 
     editor.edit((editBuilder) => {
       try {
-        logger.info(t("Mybatis SQL Formatting", editor.document.fileName));
+        logger.info(t("Mybatis SQL Formatting", fileName));
 
         try {
           const formatted = formatXml(text);
