@@ -2,7 +2,8 @@
  * @Author                : Robert Huang<56649783@qq.com>                      *
  * @CreatedDate           : 2025-08-21 02:04:00                                *
  * @LastEditors           : Robert Huang<56649783@qq.com>                      *
- * @LastEditDate          : 2026-01-20 19:40:23                                *
+ * @LastEditDate          : 2026-01-26 03:36:53                                *
+ * @FilePath              : mybatis-sql-formatter/src/main/extension.js        *
  * @CopyRight             : MerBleueAviation                                   *
  ******************************************************************************/
 
@@ -16,7 +17,7 @@ const saveHandler = require("./saveHandler");
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
-  logger.info(`Mybatis sql formatter is now active!`);
+  logger.info(`Mybatis SQL Formatter is now active!`);
 
   // The command has been defined in the package.json file
   // Now provide the implementation of the command with registerCommand
@@ -32,7 +33,7 @@ function activate(context) {
 }
 
 // This method is called when your extension is deactivated
-function deactivate() {}
+function deactivate() { }
 
 module.exports = {
   activate,

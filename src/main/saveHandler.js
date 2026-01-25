@@ -2,7 +2,7 @@
  * @Author                : Robert Huang<56649783@qq.com>                      *
  * @CreatedDate           : 2025-08-19 12:00:23                                *
  * @LastEditors           : Robert Huang<56649783@qq.com>                      *
- * @LastEditDate          : 2026-01-25 23:26:31                                *
+ * @LastEditDate          : 2026-01-26 03:42:54                                *
  * @FilePath              : mybatis-sql-formatter/src/main/saveHandler.js      *
  * @CopyRight             : MerBleueAviation                                   *
  ******************************************************************************/
@@ -17,8 +17,11 @@ const formatCurrentEditor = () => {
   const editor = vscode.window.activeTextEditor;
   if (editor) {
     const doc = editor.document;
-    const text = doc.getText();
     const fileName = doc.fileName;
+
+    if (!fileName.endsWith("xml") || fileName.endsWith("sql")) {
+      return;
+    }
 
     if (fileName.endsWith("pom.xml")) {
       logger.info(t("Skip formatting pom.xml"));
@@ -30,10 +33,9 @@ const formatCurrentEditor = () => {
         logger.info(t("Mybatis SQL Formatting", fileName));
 
         try {
+          const text = doc.getText();
           const formatted = formatXml(text);
-          const fullRange = new vscode.Range(
-            doc.positionAt(0),
-            doc.positionAt(text.length),
+          const fullRange = new vscode.Range(doc.positionAt(0), doc.positionAt(text.length),
           );
           editBuilder.replace(fullRange, formatted);
         } catch (err) {
