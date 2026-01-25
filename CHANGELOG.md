@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/hks2002/mybatis-sql-formatter/compare/v1.0.1...v1.0.2) (2026-01-25)
+
+
+### Bug Fixes
+
+* 🐛 fix format other files ([7e27c9e](https://github.com/hks2002/mybatis-sql-formatter/commit/7e27c9e91e23d6435c72112a22c15538751ac92b))
+
 ## [1.0.1](https://github.com/hks2002/mybatis-sql-formatter/compare/v1.0.0...v1.0.1) (2026-01-25)
 
 
