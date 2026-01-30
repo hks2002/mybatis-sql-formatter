@@ -1,0 +1,14 @@
+{
+  "mybatis-sql-formatter.tabWidth": "每级缩进的空格数。",
+  "mybatis-sql-formatter.useTabs": "使用制表符而不是空格进行缩进。",
+  "mybatis-sql-formatter.keywordCase": "SQL关键字的大小写转换。",
+  "mybatis-sql-formatter.identifierCase": "标识符（表、列等）的大小写转换。",
+  "mybatis-sql-formatter.dataTypeCase": "数据类型的大小写转换。",
+  "mybatis-sql-formatter.functionCase": "函数名的大小写转换。",
+  "mybatis-sql-formatter.indentStyle": "SQL语句的缩进样式。",
+  "mybatis-sql-formatter.logicalOperatorNewline": "多行语句中逻辑运算符的位置。",
+  "mybatis-sql-formatter.expressionWidth": "换行前表达式的最大宽度。",
+  "mybatis-sql-formatter.linesBetweenQueries": "查询之间的空行数。",
+  "mybatis-sql-formatter.denseOperators": "使用不带空格的密集运算符。",
+  "mybatis-sql-formatter.newlineBeforeSemicolon": "将分号放在新行上。"
+}

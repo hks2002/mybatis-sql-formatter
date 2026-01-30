@@ -1,13 +1,14 @@
-
-const { format: formatSql } = require('sql-formatter');
-
 /*******************************************************************************
  * @Author                : Robert Huang<56649783@qq.com>                      *
  * @CreatedDate           : 2026-01-20 21:34:38                                *
  * @LastEditors           : Robert Huang<56649783@qq.com>                      *
- * @LastEditDate          : 2026-01-20 21:36:14                                *
+ * @LastEditDate          : 2026-01-30 13:23:51                                *
+ * @FilePath              : mybatis-sql-formatter/src/main/formatter.js        *
  * @CopyRight             : MerBleueAviation                                   *
  ******************************************************************************/
+const { format: formatSql } = require('sql-formatter');
+const { getFormatterConfig } = require('./config');
+
 const TYPES = {
   ELEMENT: 'element',
   TEXT: 'text',
@@ -19,8 +20,6 @@ const TYPES = {
  * SQL Operation Tags - these start a SQL context
  */
 const SQL_ROOT_TAGS = ['select', 'insert', 'update', 'delete', 'sql'];
-
-
 
 /**
  * Parse XML into a tree, preserving whitespace and structure
@@ -90,24 +89,24 @@ function parseXmlRecursive(xml, startIndex) {
 
     // DOCTYPE
     if (xml.substr(i, 9).toUpperCase() === '<!DOCTYPE') {
-       let end = xml.indexOf('>', i);
-       // Check for internal subset []
-       const openBracket = xml.indexOf('[', i);
-       if (openBracket !== -1 && openBracket < end) {
-           const closeBracket = xml.indexOf(']', openBracket);
-           if (closeBracket !== -1) {
-               end = xml.indexOf('>', closeBracket);
-           }
-       }
+      let end = xml.indexOf('>', i);
+      // Check for internal subset []
+      const openBracket = xml.indexOf('[', i);
+      if (openBracket !== -1 && openBracket < end) {
+        const closeBracket = xml.indexOf(']', openBracket);
+        if (closeBracket !== -1) {
+          end = xml.indexOf('>', closeBracket);
+        }
+      }
 
-       if (end === -1) {
-           nodes.push({ type: TYPES.TEXT, content: xml.substring(i) });
-           i = len;
-       } else {
-           nodes.push({ type: TYPES.TEXT, content: xml.substring(i, end + 1) });
-           i = end + 1;
-       }
-       continue;
+      if (end === -1) {
+        nodes.push({ type: TYPES.TEXT, content: xml.substring(i) });
+        i = len;
+      } else {
+        nodes.push({ type: TYPES.TEXT, content: xml.substring(i, end + 1) });
+        i = end + 1;
+      }
+      continue;
     }
 
     // End Tag
@@ -200,10 +199,10 @@ function format(xmlText) {
   );
 
   if (hasRootTags || xmlText.trim().startsWith('<?xml')) {
-      return formatXmlNodes(nodes, 0).trim();
+    return formatXmlNodes(nodes, 0).trim();
   } else {
-      // No root tags found, treat the whole content as a SQL block (e.g. selection formatting)
-      return formatSqlBlock(nodes).trim();
+    // No root tags found, treat the whole content as a SQL block (e.g. selection formatting)
+    return formatSqlBlock(nodes).trim();
   }
 }
 
@@ -218,9 +217,9 @@ function formatXmlNodes(nodes, level) {
         result += indent + trimmed + '\n';
       }
     } else if (node.type === TYPES.CDATA) {
-        result += indent + node.content + '\n';
+      result += indent + node.content + '\n';
     } else if (node.type === TYPES.COMMENT) {
-        result += indent + node.content + '\n';
+      result += indent + node.content + '\n';
     } else if (node.type === TYPES.ELEMENT) {
       if (SQL_ROOT_TAGS.includes(node.name.toLowerCase())) {
         const innerSql = formatSqlBlock(node.children);
@@ -230,24 +229,24 @@ function formatXmlNodes(nodes, level) {
 
         let indentedContent = '';
         if (innerSql) {
-             indentedContent = innerSql.split('\n').map(line => {
-                 if (!line.trim()) return '';
-                 return sqlIndent + line;
-             }).join('\n');
+          indentedContent = innerSql.split('\n').map(line => {
+            if (!line.trim()) return '';
+            return sqlIndent + line;
+          }).join('\n');
         }
 
         if (node.selfClosing) {
-            result += `${indent}${node.openTagRaw}\n`;
+          result += `${indent}${node.openTagRaw}\n`;
         } else {
-            result += `${indent}${node.openTagRaw}\n${indentedContent}\n${indent}${node.closeTagRaw}\n`;
+          result += `${indent}${node.openTagRaw}\n${indentedContent}\n${indent}${node.closeTagRaw}\n`;
         }
       } else {
         // Standard XML Element
         if (node.selfClosing) {
-            result += `${indent}${node.openTagRaw}\n`;
+          result += `${indent}${node.openTagRaw}\n`;
         } else {
-            const childrenResult = formatXmlNodes(node.children, level + 1);
-            result += `${indent}${node.openTagRaw}\n${childrenResult}${indent}${node.closeTagRaw}\n`;
+          const childrenResult = formatXmlNodes(node.children, level + 1);
+          result += `${indent}${node.openTagRaw}\n${childrenResult}${indent}${node.closeTagRaw}\n`;
         }
       }
     }
@@ -263,14 +262,14 @@ function formatSqlBlock(nodes) {
   const sqlText = nodes.map(n => {
     if (n.type === TYPES.TEXT) return n.content;
     if (n.type === TYPES.CDATA) {
-        const key = `_CDATA_${placeholderIndex++}_`;
-        placeholders[key] = n.content;
-        return key;
+      const key = `_CDATA_${placeholderIndex++}_`;
+      placeholders[key] = n.content;
+      return key;
     }
     if (n.type === TYPES.COMMENT) {
-        const key = `_XML_COMMENT_${placeholderIndex++}_`;
-        placeholders[key] = n.content;
-        return `/*${key}*/`;
+      const key = `_XML_COMMENT_${placeholderIndex++}_`;
+      placeholders[key] = n.content;
+      return `/*${key}*/`;
     }
     if (n.type === TYPES.ELEMENT) {
       const key = `_MYBATIS_TAG_${placeholderIndex++}_`;
@@ -280,9 +279,14 @@ function formatSqlBlock(nodes) {
     return '';
   }).join('');
 
+
+  const config = getFormatterConfig();
+  console.info(config);
+
   // 2. Format the SQL
   let formattedSql = '';
   try {
+
     formattedSql = formatSql(sqlText, {
       language: 'sql',
       paramTypes: {
@@ -291,8 +295,18 @@ function formatSqlBlock(nodes) {
           { regex: String.raw`\$\{[\s\S]*?\}` }
         ]
       },
-      tabWidth: 2,
-      keywordCase: 'upper',
+      tabWidth: config.tabWidth || 2,
+      useTabs: config.useTabs || false,
+      keywordCase: config.keywordCase || 'preserve',
+      identifierCase: config.identifierCase || 'preserve',
+      dataTypeCase: config.dataTypeCase || 'preserve',
+      functionCase: config.functionCase || 'preserve',
+      indentStyle: config.indentStyle || 'standard',
+      logicalOperatorNewline: config.logicalOperatorNewline || 'before',
+      expressionWidth: config.expressionWidth || 50,
+      linesBetweenQueries: config.linesBetweenQueries || 1,
+      denseOperators: config.denseOperators || false,
+      newlineBeforeSemicolon: config.newlineBeforeSemicolon || false,
     });
   } catch (e) {
     console.error('SQL Formatting failed', e);
@@ -300,75 +314,75 @@ function formatSqlBlock(nodes) {
   }
 
   // 3. Restore placeholders
-  return restorePlaceholders(formattedSql, placeholders).trim();
+  return restorePlaceholders(formattedSql, placeholders, config.tabWidth || 2).trim();
 }
 
 /**
  * Improved restoration with indentation support
  */
 function restorePlaceholders(formattedSql, placeholders, tabSize = 2) {
-    const lines = formattedSql.split('\n');
-    const resultLines = [];
+  const lines = formattedSql.split('\n');
+  const resultLines = [];
 
-    for (let line of lines) {
-        if (!line.includes('_MYBATIS_TAG_') && !line.includes('_CDATA_') && !line.includes('_XML_COMMENT_')) {
-            resultLines.push(line);
-            continue;
-        }
-
-        let currentLine = line;
-
-        const re = /(_MYBATIS_TAG_\d+_)|(_CDATA_\d+_)|(\/\*_XML_COMMENT_\d+_\*\/)/g;
-
-        currentLine = currentLine.replace(re, (match, tagKey, cdataKey, commentKey) => {
-             if (cdataKey) return placeholders[cdataKey];
-             if (commentKey) {
-                 const inner = commentKey.replace(/^\/\*|\*\/$/g, '');
-                 return placeholders[inner];
-             }
-
-             if (tagKey) {
-                 const node = placeholders[tagKey];
-                 // Calculate indentation
-                 const matchIndex = line.indexOf(match);
-                 const prefix = line.substring(0, matchIndex);
-                 const indentMatch = prefix.match(/^\s*/);
-                 const baseIndent = indentMatch ? indentMatch[0] : '';
-
-                 // Check if we need to force a newline for block-level tags
-                 const BLOCK_TAGS = ['include', 'trim', 'where', 'set', 'foreach', 'if', 'choose', 'when', 'otherwise', 'bind'];
-                 const isBlockTag = BLOCK_TAGS.includes(node.name.toLowerCase());
-                 const hasPrecedingContent = prefix.trim().length > 0;
-
-                 let prefixNewline = '';
-                 if (isBlockTag && hasPrecedingContent) {
-                     prefixNewline = '\n' + baseIndent;
-                 }
-
-                 const innerContent = formatSqlBlock(node.children);
-
-                 if (!innerContent.trim()) {
-                     if (node.selfClosing) return `${prefixNewline}${node.openTagRaw}`;
-                     return `${prefixNewline}${node.openTagRaw}${node.closeTagRaw}`;
-                 }
-
-                 const innerIndent = baseIndent + ' '.repeat(tabSize);
-                 const indentedInner = innerContent.split('\n').map((l) => {
-                     if (!l.trim()) return l;
-                     return innerIndent + l;
-                 }).join('\n');
-
-                 if (node.selfClosing) return `${prefixNewline}${node.openTagRaw}`;
-
-                 return `${prefixNewline}${node.openTagRaw}\n${indentedInner}\n${baseIndent}${node.closeTagRaw}`;
-             }
-             return match;
-        });
-
-        resultLines.push(currentLine);
+  for (let line of lines) {
+    if (!line.includes('_MYBATIS_TAG_') && !line.includes('_CDATA_') && !line.includes('_XML_COMMENT_')) {
+      resultLines.push(line);
+      continue;
     }
 
-    return resultLines.join('\n');
+    let currentLine = line;
+
+    const re = /(_MYBATIS_TAG_\d+_)|(_CDATA_\d+_)|(\/\*_XML_COMMENT_\d+_\*\/)/g;
+
+    currentLine = currentLine.replace(re, (match, tagKey, cdataKey, commentKey) => {
+      if (cdataKey) return placeholders[cdataKey];
+      if (commentKey) {
+        const inner = commentKey.replace(/^\/\*|\*\/$/g, '');
+        return placeholders[inner];
+      }
+
+      if (tagKey) {
+        const node = placeholders[tagKey];
+        // Calculate indentation
+        const matchIndex = line.indexOf(match);
+        const prefix = line.substring(0, matchIndex);
+        const indentMatch = prefix.match(/^\s*/);
+        const baseIndent = indentMatch ? indentMatch[0] : '';
+
+        // Check if we need to force a newline for block-level tags
+        const BLOCK_TAGS = ['include', 'trim', 'where', 'set', 'foreach', 'if', 'choose', 'when', 'otherwise', 'bind'];
+        const isBlockTag = BLOCK_TAGS.includes(node.name.toLowerCase());
+        const hasPrecedingContent = prefix.trim().length > 0;
+
+        let prefixNewline = '';
+        if (isBlockTag && hasPrecedingContent) {
+          prefixNewline = '\n' + baseIndent;
+        }
+
+        const innerContent = formatSqlBlock(node.children);
+
+        if (!innerContent.trim()) {
+          if (node.selfClosing) return `${prefixNewline}${node.openTagRaw}`;
+          return `${prefixNewline}${node.openTagRaw}${node.closeTagRaw}`;
+        }
+
+        const innerIndent = baseIndent + ' '.repeat(tabSize);
+        const indentedInner = innerContent.split('\n').map((l) => {
+          if (!l.trim()) return l;
+          return innerIndent + l;
+        }).join('\n');
+
+        if (node.selfClosing) return `${prefixNewline}${node.openTagRaw}`;
+
+        return `${prefixNewline}${node.openTagRaw}\n${indentedInner}\n${baseIndent}${node.closeTagRaw}`;
+      }
+      return match;
+    });
+
+    resultLines.push(currentLine);
+  }
+
+  return resultLines.join('\n');
 }
 
 module.exports = { format };

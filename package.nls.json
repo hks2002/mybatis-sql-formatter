@@ -1,0 +1,14 @@
+{
+  "mybatis-sql-formatter.tabWidth": "Number of spaces per indentation level.",
+  "mybatis-sql-formatter.useTabs": "Use tabs for indentation instead of spaces.",
+  "mybatis-sql-formatter.keywordCase": "Case transformation for SQL keywords.",
+  "mybatis-sql-formatter.identifierCase": "Case transformation for identifiers (tables, columns, etc.).",
+  "mybatis-sql-formatter.dataTypeCase": "Case transformation for data types.",
+  "mybatis-sql-formatter.functionCase": "Case transformation for function names.",
+  "mybatis-sql-formatter.indentStyle": "Indentation style for SQL statements.",
+  "mybatis-sql-formatter.logicalOperatorNewline": "Position of logical operators in multi-line statements.",
+  "mybatis-sql-formatter.expressionWidth": "Maximum width of expressions before wrapping.",
+  "mybatis-sql-formatter.linesBetweenQueries": "Number of blank lines between queries.",
+  "mybatis-sql-formatter.denseOperators": "Use dense operators without spaces around them.",
+  "mybatis-sql-formatter.newlineBeforeSemicolon": "Place semicolon on a new line."
+}
