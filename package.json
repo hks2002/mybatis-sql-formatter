@@ -4,7 +4,7 @@
   "description": "format MyBatis tag mixed with SQL",
   "publisher": "MerBleueAviation",
   "license": "MIT",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/hks2002/mybatis-sql-formatter.git"
@@ -63,57 +63,80 @@
       "type": "object",
       "title": "MyBatis SQL Formatter",
       "properties": {
-         "mybatis-sql-formatter.tabWidth": {
+        "mybatis-sql-formatter.tabWidth": {
           "order": 0,
           "type": "number",
           "default": 2,
           "description": "%mybatis-sql-formatter.tabWidth%"
         },
-         "mybatis-sql-formatter.useTabs": {
+        "mybatis-sql-formatter.useTabs": {
           "order": 1,
           "type": "boolean",
           "default": false,
           "description": "%mybatis-sql-formatter.useTabs%"
         },
-         "mybatis-sql-formatter.keywordCase": {
+        "mybatis-sql-formatter.keywordCase": {
           "order": 2,
           "type": "string",
-          "enum": ["preserve", "upper", "lower"],
+          "enum": [
+            "preserve",
+            "upper",
+            "lower"
+          ],
           "default": "preserve",
           "description": "%mybatis-sql-formatter.keywordCase%"
         },
         "mybatis-sql-formatter.identifierCase": {
           "order": 3,
           "type": "string",
-          "enum": ["preserve", "upper", "lower"],
+          "enum": [
+            "preserve",
+            "upper",
+            "lower"
+          ],
           "default": "preserve",
           "description": "%mybatis-sql-formatter.identifierCase%"
         },
         "mybatis-sql-formatter.dataTypeCase": {
           "order": 4,
           "type": "string",
-          "enum": ["preserve", "upper", "lower"],
+          "enum": [
+            "preserve",
+            "upper",
+            "lower"
+          ],
           "default": "preserve",
           "description": "%mybatis-sql-formatter.dataTypeCase%"
         },
         "mybatis-sql-formatter.functionCase": {
           "order": 5,
           "type": "string",
-          "enum": ["preserve", "upper", "lower"],
+          "enum": [
+            "preserve",
+            "upper",
+            "lower"
+          ],
           "default": "preserve",
           "description": "%mybatis-sql-formatter.functionCase%"
         },
         "mybatis-sql-formatter.indentStyle": {
           "order": 6,
           "type": "string",
-          "enum": ["standard", "tabularLeft", "tabularRight"],
+          "enum": [
+            "standard",
+            "tabularLeft",
+            "tabularRight"
+          ],
           "default": "standard",
           "description": "%mybatis-sql-formatter.indentStyle%"
         },
         "mybatis-sql-formatter.logicalOperatorNewline": {
           "order": 7,
           "type": "string",
-          "enum": ["before", "after"],
+          "enum": [
+            "before",
+            "after"
+          ],
           "default": "before",
           "description": "%mybatis-sql-formatter.logicalOperatorNewline%"
         },
