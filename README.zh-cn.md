@@ -1,6 +1,7 @@
 # MyBatis SQL Formatter
+
 ![Github Version](https://img.shields.io/github/package-json/v/hks2002/mybatis-sql-formatter)
-![Github Build Status](https://img.shields.io/github/actions/workflow/status/hks2002/mybatis-sql-formatter/Build.yml)
+![Github Build Status](https://img.shields.io/github/actions/workflow/status/hks2002/mybatis-sql-formatter/Build_Release.yml)
 ![GitHub License](https://img.shields.io/github/license/hks2002/mybatis-sql-formatter)
 ![GitHub Starts](https://img.shields.io/github/stars/hks2002/mybatis-sql-formatter)
 ![VS marketplace Version](https://img.shields.io/visual-studio-marketplace/v/MerBleueAviation.mybatis-sql-formatter)
@@ -28,4 +29,3 @@
    - Windows: `Ctrl+Win+F`
    - Mac: `Ctrl+Cmd+F`
    - Linux: `Ctrl+Meta+F`
-
