@@ -62,3 +62,9 @@ jobs:
         run: gh release upload "${{ steps.release.outputs.tag_name }}" *.vsix --clobber
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish to VS Code Marketplace
+        if: ${{ steps.release.outputs.release_created == 'true' }}
+        run: pnpm run publish
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
