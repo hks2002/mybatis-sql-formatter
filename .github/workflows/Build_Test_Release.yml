@@ -40,8 +40,25 @@ jobs:
       - run: xvfb-run -a pnpm test
         if: runner.os == 'Linux'
 
+      - name: Package VSIX
+        run: pnpm run package
+
+      - name: Upload VSIX artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: mybatis-sql-formatter-vsix
+          path: '*.vsix'
+          if-no-files-found: error
+
       - uses: googleapis/release-please-action@v4
+        id: release
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           release-type: node
           config-file: release-please-config.json
+
+      - name: Upload VSIX to GitHub Release
+        if: ${{ steps.release.outputs.release_created == 'true' }}
+        run: gh release upload "${{ steps.release.outputs.tag_name }}" *.vsix --clobber
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
