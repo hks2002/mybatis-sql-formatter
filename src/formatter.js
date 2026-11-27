@@ -22,6 +22,24 @@ const TYPES = {
 const SQL_ROOT_TAGS = ['select', 'insert', 'update', 'delete', 'sql']
 
 /**
+ * Friendly dialect aliases mapped to sql-formatter language names
+ */
+const DIALECT_ALIASES = {
+  sqlserver: 'transactsql',
+}
+
+/**
+ * Remove the common leading indentation of a block of text
+ */
+function dedent(text) {
+  const lines = text.split('\n')
+  const indents = lines.filter((l) => l.trim()).map((l) => l.match(/^\s*/)[0].length)
+  const min = indents.length ? Math.min(...indents) : 0
+  if (min === 0) return text
+  return lines.map((l) => (l.trim() ? l.slice(min) : l)).join('\n')
+}
+
+/**
  * Parse XML into a tree, preserving whitespace and structure
  */
 
@@ -285,13 +303,11 @@ function formatSqlBlock(nodes) {
     })
     .join('')
 
-  console.info(config)
-
   // 2. Format the SQL
   let formattedSql = ''
   try {
     formattedSql = formatSql(sqlText, {
-      language: config.dialect || 'sql',
+      language: DIALECT_ALIASES[config.dialect] || config.dialect || 'sql',
       paramTypes: {
         custom: [{ regex: String.raw`#\{[\s\S]*?\}` }, { regex: String.raw`\$\{[\s\S]*?\}` }],
       },
@@ -314,7 +330,7 @@ function formatSqlBlock(nodes) {
   }
 
   // 3. Restore placeholders
-  return restorePlaceholders(formattedSql, placeholders, config.tabWidth || 2).trim()
+  return dedent(restorePlaceholders(formattedSql, placeholders, config.tabWidth || 2)).trim()
 }
 
 /**

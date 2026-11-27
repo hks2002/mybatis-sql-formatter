@@ -160,6 +160,28 @@ suite('Formatter Test Suite', () => {
     assert.ok(formatted.includes('created_at'))
   })
 
+  test('Formatting is idempotent', () => {
+    // T-SQL temp table makes the default "sql" dialect fail to parse,
+    // the original text must still not drift to the right on repeated formatting.
+    const xml = `<mapper namespace="demo.TestMapper">
+  <select id="selectDemo" resultType="Map">
+    SELECT * INTO #T_TEMP FROM (
+      SELECT id, name FROM users WHERE 1 = 1
+      <include refid="whereClause" />
+    ) AS T;
+  </select>
+</mapper>`
+
+    const once = format(xml)
+    const twice = format(once)
+
+    console.log('\n--- Idempotent Formatting ---')
+    console.log(once)
+    console.log('-----------------------------\n')
+
+    assert.strictEqual(twice, once)
+  })
+
   test('Empty and Whitespace Only Content', () => {
     // Test with minimal content
     const emptyXml = `<mapper namespace="test"></mapper>`

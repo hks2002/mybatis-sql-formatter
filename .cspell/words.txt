@@ -1,8 +1,13 @@
 balabala
 Bleue
+duckdb
 esbuild
 keytar
 Mybatis
 oxfmt
 oxlint
 refid
+singlestoredb
+tidb
+transactsql
+trino
