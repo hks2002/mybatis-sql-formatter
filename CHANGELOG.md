@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.2.0](https://github.com/hks2002/mybatis-sql-formatter/compare/v1.1.0...v1.2.0) (2026-11-27)
+
+
+### Features
+
+* ✨add .vsix release ([3536a51](https://github.com/hks2002/mybatis-sql-formatter/commit/3536a51ac613877ca768f68439f0b29a82c3c435))
+* ✨add dialect config ([1afd8e9](https://github.com/hks2002/mybatis-sql-formatter/commit/1afd8e90dfb990c33d48c547293bd5b17c32337b))
+* ✨change on save to format by ([5dfc046](https://github.com/hks2002/mybatis-sql-formatter/commit/5dfc04625127b12b4c5a802e6099230bb9d249ff))
+
 ## [1.1.0](https://github.com/hks2002/mybatis-sql-formatter/compare/v1.0.1...v1.1.0) (2026-01-30)
 
 
