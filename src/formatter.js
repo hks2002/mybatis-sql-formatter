@@ -291,7 +291,7 @@ function formatSqlBlock(nodes) {
   let formattedSql = ''
   try {
     formattedSql = formatSql(sqlText, {
-      language: 'sql',
+      language: config.dialect || 'sql',
       paramTypes: {
         custom: [{ regex: String.raw`#\{[\s\S]*?\}` }, { regex: String.raw`\$\{[\s\S]*?\}` }],
       },
