@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/hks2002/mybatis-sql-formatter/compare/v1.2.0...v1.3.0) (2026-11-27)
+
+
+### Features
+
+* ✨auto release to vscode marketplace ([04ee6e0](https://github.com/hks2002/mybatis-sql-formatter/commit/04ee6e01ee6f722be187dc900890ece8cc263074))
+
 ## [1.2.0](https://github.com/hks2002/mybatis-sql-formatter/compare/v1.1.0...v1.2.0) (2026-11-27)
 
 
