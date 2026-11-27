@@ -1,4 +1,5 @@
 {
+  "mybatis-sql-formatter.dialect": "用于格式化的 SQL 方言。可选值：sql、mysql、mariadb、tidb、postgresql、redshift、sqlite、sqlserver、plsql、db2、db2i、bigquery、hive、spark、snowflake、trino、duckdb、n1ql、singlestoredb。",
   "mybatis-sql-formatter.tabWidth": "每级缩进的空格数。",
   "mybatis-sql-formatter.useTabs": "使用制表符而不是空格进行缩进。",
   "mybatis-sql-formatter.keywordCase": "SQL关键字的大小写转换。",

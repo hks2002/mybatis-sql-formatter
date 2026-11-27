@@ -1,4 +1,5 @@
 {
+  "mybatis-sql-formatter.dialect": "SQL dialect used for formatting. Supported values: sql, mysql, mariadb, tidb, postgresql, redshift, sqlite, sqlserver, plsql, db2, db2i, bigquery, hive, spark, snowflake, trino, duckdb, n1ql, singlestoredb.",
   "mybatis-sql-formatter.tabWidth": "Number of spaces per indentation level.",
   "mybatis-sql-formatter.useTabs": "Use tabs for indentation instead of spaces.",
   "mybatis-sql-formatter.keywordCase": "Case transformation for SQL keywords.",
