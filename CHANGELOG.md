@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/hks2002/mybatis-sql-formatter/compare/v1.3.0...v1.3.1) (2026-11-27)
+
+
+### Bug Fixes
+
+* 🐛fix ident error ([4e593c7](https://github.com/hks2002/mybatis-sql-formatter/commit/4e593c776b0b6f4f8d4f5cdc5fc53809240219c8))
+
 ## [1.3.0](https://github.com/hks2002/mybatis-sql-formatter/compare/v1.2.0...v1.3.0) (2026-11-27)
 
 

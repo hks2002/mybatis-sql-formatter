@@ -4,7 +4,7 @@
   "description": "format MyBatis tag mixed with SQL",
   "publisher": "MerBleueAviation",
   "license": "MIT",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/hks2002/mybatis-sql-formatter.git"
